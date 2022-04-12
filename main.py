@@ -38,19 +38,19 @@ def index():
 
         # build the dict object
         h = hashlib.md5(bytes(email, "utf-8")).hexdigest()
+
+        user_ref = emails_ref.child(h)
         o = {
-                h: {
-                    "email": email,
-                    "games": {
-                        "valorant": valorant,
-                        "league_of_legends": league_of_legends
-                        }
+                "email": email,
+                "games": {
+                    "valorant": valorant,
+                    "league_of_legends": league_of_legends
                     }
                 }
 
 
         # set the json object in the database
-        emails_ref.set(o)
+        user_ref.set(o)
 
         return render_template("index.html", subscribed=True)
 
